@@ -23,7 +23,7 @@ RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositori
         python3-dev==3.8.2-r0 \
         make==4.2.1-r2 \
         jq==1.6_rc1-r1 && \
-    apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted secrethub-cli==0.38.0 && \
+    apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted secrethub-cli==0.38.0-r0 && \
     rc-update add docker boot && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \

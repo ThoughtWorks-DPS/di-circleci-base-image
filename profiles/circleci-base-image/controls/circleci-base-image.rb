@@ -37,6 +37,6 @@ control 'secrethub version' do
   title 'confirm secrethub version installed'
   desc 'confirm version reported by secrethub matches the desired version'
   describe command('secrethub --version') do
-    its('stdout') { should include ('0.38') }
+    its('stderr') { should include ('0.38') }
   end
 end
