@@ -7,7 +7,7 @@
 	</p>
   <h3>ThoughtWorks DPS Convenience Images</h3>
   <h1>twdps/di-circleci-base-image</h1>
-  [![feedyard](https://circleci.com/gh/ThoughtWorks-DPS/di-circleci-base-image.svg?style=shield)](https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/di-circleci-base-image) ![Software License](https://img.shields.io/badge/license-MIT-blue.svg)  
+  <a href="https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/di-circleci-base-image"><img src="https://circleci.com/gh/ThoughtWorks-DPS/di-circleci-base-image.svg?style=shield"></a> <a href="https://hub.docker.com/repository/docker/twdps/di-circleci-base-image"><img src="https://img.shields.io/docker/v/twdps/di-circleci-base-image?sort=semver"></a> <a href="https://hub.docker.com/repository/docker/twdps/di-circleci-base-image"><img src="https://img.shields.io/docker/image-size/twdps/di-circleci-base-image?sort=semver"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/ThoughtWorks-DPS/di-circleci-base-image"></a>
   <h5>A Continous Integration focused Alpine Docker image built to run on CircleCI</h5>
 </div>
 <br />
@@ -21,7 +21,7 @@ governance and security prpofile.
 **Other images in this series**  
 
 twdps/di-circleci-infra-image  
-twdps/di-circleci-k8s-deploy-image  
+twdps/di-circleci-k8s-deploy-image 
 twdps/di-circleci-python-image  
 twdps/di-circleci-go-image  
 twdps/di-circleci-node-image  
