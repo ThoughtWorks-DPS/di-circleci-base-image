@@ -24,7 +24,7 @@ workflows:
       - executor-tools/dev-release:
           name: "dev-build"
           context: ZTW
-          after_build:
+          after-build:
             - snyk/scan:
                 docker-image-name: twdps/di-circleci-base-image:$CIRCLE_SHA1
                 organization: twdps
