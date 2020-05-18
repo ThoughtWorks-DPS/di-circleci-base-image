@@ -37,7 +37,7 @@ workflows:
           context: ZTW
           release: stable
           clean-tags:
-            - clean-docker-hub:
+            - executor-tools/clean-docker-hub:
                 image: twdps/di-circleci-base-image
           filters: *on-tag-master
           image: twdps/di-circleci-base-image
