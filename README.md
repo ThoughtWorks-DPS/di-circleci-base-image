@@ -32,7 +32,6 @@ twdps/di-circleci-node-image
 - [What is included in the image](#what-is-included-in-the-image)
 - [Development](#development)
 - [Contributing](#contributing)
-- [Additional Resources](#additional-resources)
 
 ## Getting Started
 
@@ -43,20 +42,34 @@ For example:
 jobs:
   build:
     docker:
-      - image: twdps/di-circleci-infra-image:1.0.3
+      - image: twdps/di-circleci-base-image:1.0.3
     steps:
       - checkout
       - setup-remote-docker
-      - run: sudo apt-get update && sudo apt-get install -y cowsay
-      - run: cowsay Continuous Integration Rocks!
+      - run: docker build -t 'org/image:tag' .
 ```
 
 ## What is Included in the Image
 
-In addition to the minimum requirements needed to be used as a remote docker executor on CircleCI, the base image  
-includes:
+In addition to the minimum requirements needed to be used as a remote docker executor on CircleCI, the  
+twdps base image includes:
 
 
+| tools      | dev pkgs     | python pkgs  |
+|------------|--------------|--------------|
+| bash       | gcc          | setuptools   |
+| curl       | g++          | pip          |
+| openssl    | python3      | invoke       |
+| gnupg      | python3-dev  | pylint       |
+| docker     | build-base   | yamllint     |
+| openrc     | musl-dev     | datadog      |
+| jq         | libc-dev     | hvac         |
+| secrethub  | libffi-dev   | jinja2       |
+|            | openssl-dev  | requests     |
+|            | make         |              |
+
+The selection of `dev pkgs` reflects the frequent use of python and python packages in pipelines or  
+Dockerfile ci. Building python packages is a common requirement.  
 
 ### Tagging Scheme
 
@@ -90,9 +103,6 @@ To build and test the Docker image locally, run the `testlocal.sh` script:
 ./testlocal.sh
 ```
 
-This script build the image and uses `chef/inspec` and `feedyard/docker-benchmark` to test the health  
-and secure configuration of the image.
-
 ### Publishing Official Images (for Maintainers only)
 
 Git push will trigger the dev-build pipeline. In addition to the tests performed in testlocal.sh,  
@@ -109,9 +119,3 @@ practices and software defined infrastructure. In order for us to add a tool wit
 the overall TW DPS reference architecture. Suggest packages based on proposed changes to existing tools or services and include a defense for why an alternative approach is superior.  
 1. Issues are generally the best option to report bugs or request additional/removal of tools in this image. PRs for bug  
 fixes are always welcome.  
-
-## Additional Resources
-
-- cncf
-- 
-
