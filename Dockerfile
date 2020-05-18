@@ -1,4 +1,4 @@
-FROM twdps/di-circleci-remote-docker:2020.05
+FROM cimg/base:2020.05
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
