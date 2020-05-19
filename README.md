@@ -68,6 +68,7 @@ twdps base image includes:
 |            | openssl-dev  | requests     |
 |            | make         |              |
 
+
 The selection of `dev pkgs` reflects the frequent use of python and python packages in pipelines or  
 Dockerfile ci. Building python packages is a common requirement.  
 
