@@ -23,7 +23,7 @@ workflows:
     jobs:
       - executor-tools/dev-release:
           name: "dev-build"
-          context: ZTW
+          context: twdps-di
           after-build:
             - snyk/scan:
                 docker-image-name: twdps/di-circleci-base-image:dev.$CIRCLE_SHA1
@@ -34,7 +34,7 @@ workflows:
           image: twdps/di-circleci-base-image
       - executor-tools/publish:
           name: Release
-          context: ZTW
+          context: twdps-di
           release: stable
           clean-tags:
             - executor-tools/clean-docker-hub:
