@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  executor-tools: feedyard/executor-tools@0.5.0
+  executor-tools: feedyard/executor-tools@dev:e16463c
   snyk: snyk/snyk@0.0.10
 
 on-push-master: &on-push-master
@@ -24,20 +24,32 @@ workflows:
       - executor-tools/dev-release:
           name: "dev-build"
           context: twdps-di
-          after-build:
-            - snyk/scan:
-                docker-image-name: twdps/di-circleci-base-image:dev.$CIRCLE_SHA1
-                organization: twdps
-                fail-on-issues: true
-                monitor-on-build: false
-          filters: *on-push-master
           image: twdps/di-circleci-base-image
+          docker-cve-scan: true
+          snyk-organization: twdps
+          # after-build:
+          #   - run:
+          #       command: |
+          #         docker run -it \
+          #                    -e "SNYK_TOKEN=<$SNYK_TOKEN" \
+          #                    -e "MONITOR=false" \
+          #                    -v "${PWD}:/project" \
+          #                    -v "/var/run/docker.sock:/var/run/docker.sock" \
+          #                    snyk/snyk-cli:docker test --docker twdps/di-circleci-base-image:dev.$CIRCLE_SHA1 --file=./Dockerfile
+            # - snyk/scan:
+            #     docker-image-name: twdps/di-circleci-base-image:dev.$CIRCLE_SHA1
+            #     organization: twdps
+            #     fail-on-issues: true
+            #     monitor-on-build: false
+          filters: *on-push-master
+          
       - executor-tools/publish:
           name: Release
           context: twdps-di
+          image: twdps/di-circleci-base-image
           release: stable
           clean-tags:
             - executor-tools/clean-docker-hub:
                 image: twdps/di-circleci-base-image
           filters: *on-tag-master
-          image: twdps/di-circleci-base-image
+          

@@ -54,23 +54,14 @@ jobs:
 In addition to the minimum requirements needed to be used as a remote docker executor on CircleCI, the  
 twdps base image includes:
 
-
-| tools      | dev pkgs     | python pkgs  |
-|------------|--------------|--------------|
-| bash       | gcc          | setuptools   |
-| curl       | g++          | pip          |
-| openssl    | python3      | invoke       |
-| gnupg      | python3-dev  | pylint       |
-| docker     | build-base   | yamllint     |
-| openrc     | musl-dev     | datadog      |
-| jq         | libc-dev     | hvac         |
-| secrethub  | libffi-dev   | jinja2       |
-|            | openssl-dev  | requests     |
-|            | make         |              |
-
-
-The selection of `dev pkgs` reflects the frequent use of python and python packages in pipelines or  
-Dockerfile ci. Building python packages is a common requirement.  
+- bash
+- curl
+- openssl
+- gnupg
+- docker
+- openrc
+- jq
+- secrethub
 
 ### Tagging Scheme
 
