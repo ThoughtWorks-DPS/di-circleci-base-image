@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  executor-tools: feedyard/executor-tools@0.4.2
+  executor-tools: feedyard/executor-tools@0.5.0
   snyk: snyk/snyk@0.0.10
 
 on-push-master: &on-push-master
