@@ -16,15 +16,17 @@ With some inspiration from the CircleCI convenience images, `twdps/di-circleci-b
 remote docker executor images built FROM `twdps/di-circleci-remote-docker` for continuous delivery within a software  
 defined delivery platform. This image is designed to serve as a base image and provides the core packages and configuration  
 needed to provide a self-serve, low friction experience for cross functional, independent development teams with a high  
-governance and security prpofile. 
+governance and security profile.  
+
+_difference with cimg libraries._ Enterprise settings often require specific security and configuration testing.  
+The twdps series of convenience images is based on Alpine linux and includes common sdlc practices including  
+benchmark testing.  
 
 **Other images in this series**  
 
 twdps/di-circleci-infra-image  
 twdps/di-circleci-k8s-deploy-image 
 twdps/di-circleci-python-image  
-twdps/di-circleci-go-image  
-twdps/di-circleci-node-image  
 
 ## Table of Contents
 
