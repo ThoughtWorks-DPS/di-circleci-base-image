@@ -30,12 +30,12 @@ workflows:
           after-build:
             - run:
                 command: |
-                  CID=$(docker run --name cis-test-di-circleci-base-image \
+                  CID=$(docker run --name di-circleci-base-image-edge \
                       -it -d --entrypoint "/bin/ash" \
                       "twdps/di-circleci-base-image:edge")
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
-                             -e IMAGE_NAME="twdps/di-circleci-base-image" \
+                             -e IMAGE_NAME="di-circleci-base-image" \
                              -e IMAGE_TAG="edge" \
                              -e CONTAINER_USER="circleci" \
                              -e CID="$CID" \
