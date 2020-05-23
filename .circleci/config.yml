@@ -25,6 +25,7 @@ workflows:
           name: "dev-build"
           context: twdps-di
           image: twdps/di-circleci-base-image
+          tag: edge
           docker-cve-scan: true
           snyk-organization: twdps
           # after-build:
