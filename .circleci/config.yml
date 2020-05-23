@@ -25,9 +25,20 @@ workflows:
           context: twdps-di
           image: twdps/di-circleci-base-image
           tag: edge
-          docker-cve-scan: true
+          docker-cve-scan: false
           snyk-organization: twdps
           after-build:
+            - run:
+                command: |
+                  docker run -it \
+                             -v /var/run/docker.sock:/var/run/docker.sock \
+                             -e "SNYK_TOKEN=$SNYK_TOKEN" \
+                             -v "${PWD}:/project" \
+                             snyk/snyk-cli:1.320.0-docker test \
+                             --org=twdps \
+                             --severity-threshold=low \
+                             --docker twdps/di-circleci-base-image:edge \
+                             --file=Dockerfile
             - run:
                 command: |
                   CID=$(docker run --name di-circleci-base-image-edge \
@@ -58,7 +69,7 @@ workflows:
                 image: twdps/di-circleci-base-image
           filters: *on-tag-master
           
-          
+
   # currently circleci does not support scheduled builds that use restricted contexts
   #
   # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
