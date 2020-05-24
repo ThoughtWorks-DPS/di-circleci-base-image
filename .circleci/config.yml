@@ -103,6 +103,7 @@ workflows:
           after-build:
             - run:
                 command: |
+                  pwd
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e "SNYK_TOKEN=$SNYK_TOKEN" \

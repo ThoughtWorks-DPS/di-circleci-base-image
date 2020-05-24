@@ -12,6 +12,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              gnupg \
              docker \
              openrc \
+             libstdc++ \
              jq && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli && \
