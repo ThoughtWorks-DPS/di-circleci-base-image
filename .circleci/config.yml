@@ -1,82 +1,10 @@
-# ---
-# version: 2.1
-
-# orbs:
-#   docker: circleci/docker@1.0.1
-
-# # yaml anchor filters
-# on-push-master: &on-push-master
-#   branches:
-#     only: /master/
-#   tags:
-#     ignore: /.*/
-
-# on-tag-master: &on-tag-master
-#   branches:
-#     ignore: /.*/
-#   tags:
-#     only: /.*/
-
-
-# workflows:
-#   di-circleci-base-image-image-pipeline:
-#     jobs:
-#       - docker/hadolint:
-#           filters: *on-push-master
-#       - docker/publish:
-#           name: test-build
-#           context: twdps-di
-#           deploy: true
-#           image: twdps/di-circleci-base-image
-#           lint-dockerfile: true
-#           tag: edge
-#           requires:
-#             - docker/hadolint
-#           filters: *on-push-master
-#           after_build:
-#             - run:
-#                 command: |
-#                   docker run -it \
-#                              -v /var/run/docker.sock:/var/run/docker.sock \
-#                              -e "SNYK_TOKEN=$SNYK_TOKEN" \
-#                              -v "${PWD}:/project" \
-#                              snyk/snyk-cli:1.320.0-docker test \
-#                              --org=twdps \
-#                              --severity-threshold=low \
-#                              --docker twdps/di-circleci-base-image:edge \
-#                              --file=Dockerfile
-#             - run:
-#                 command: |
-#                   CID=$(docker run --name di-circleci-base-image-edge \
-#                                    -it -d --entrypoint "/bin/ash" \
-#                                    "twdps/di-circleci-base-image:edge")
-#                   docker run -it \
-#                              -v /var/run/docker.sock:/var/run/docker.sock \
-#                              -e IMAGE_NAME="di-circleci-base-image" \
-#                              -e IMAGE_TAG="edge" \
-#                              -e CONTAINER_USER="circleci" \
-#                              -e CID="$CID" \
-#                              "feedyard/docker-benchmark"
-#                   docker run -it --rm \
-#                             -v /var/run/docker.sock:/var/run/docker.sock \
-#                             -e CHEF_LICENSE="accept" \
-#                             -v "$(pwd)":/share \
-#                             chef/inspec exec profiles/circleci-base-image \
-#                             -t docker://"${CID}"
-#       - docker/publish:
-#           name: release
-#           context: twdps-di
-#           image: twdps/di-circleci-base-image
-#           tag: '$CIRCLE_TAG,stable'
-#           filters: *on-tag-master
-
-
 ---
 version: 2.1
 
 orbs:
-  executor-tools: feedyard/executor-tools@dev:latest
+  docker: circleci/docker@1.0.1
 
+# yaml anchor filters
 on-push-master: &on-push-master
   branches:
     only: /master/
@@ -89,18 +17,23 @@ on-tag-master: &on-tag-master
   tags:
     only: /.*/
 
+
 workflows:
-  version: 2
-  di-circleci-base-image-pipeline:
+  di-circleci-base-image-image-pipeline:
     jobs:
-      - executor-tools/dev-release:
-          name: "dev-build"
+      - docker/hadolint:
+          filters: *on-push-master
+      - docker/publish:
+          name: test-build
           context: twdps-di
+          deploy: true
           image: twdps/di-circleci-base-image
+          lint-dockerfile: true
           tag: edge
-          docker-cve-scan: false
-          snyk-organization: twdps
-          after-build:
+          requires:
+            - docker/hadolint
+          filters: *on-push-master
+          after_build:
             - run:
                 command: |
                   pwd
@@ -108,17 +41,17 @@ workflows:
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e "SNYK_TOKEN=$SNYK_TOKEN" \
-                             -v "${PWD}:/" \
+                             -v "${PWD}:/project" \
                              snyk/snyk-cli:1.320.0-docker test \
                              --org=twdps \
                              --severity-threshold=low \
                              --docker twdps/di-circleci-base-image:edge \
-                             --file=./Dockerfile
+                             --file=Dockerfile
             - run:
                 command: |
                   CID=$(docker run --name di-circleci-base-image-edge \
-                      -it -d --entrypoint "/bin/ash" \
-                      "twdps/di-circleci-base-image:edge")
+                                   -it -d --entrypoint "/bin/ash" \
+                                   "twdps/di-circleci-base-image:edge")
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e IMAGE_NAME="di-circleci-base-image" \
@@ -132,41 +65,110 @@ workflows:
                             -v "$(pwd)":/share \
                             chef/inspec exec profiles/circleci-base-image \
                             -t docker://"${CID}"
-          filters: *on-push-master
-          
-      - executor-tools/publish:
-          name: Release
+      - docker/publish:
+          name: release
           context: twdps-di
           image: twdps/di-circleci-base-image
-          release: stable
-          clean-tags:
-            - executor-tools/clean-docker-hub:
-                image: twdps/di-circleci-base-image
+          tag: '$CIRCLE_TAG,stable'
           filters: *on-tag-master
+
+
+# ---
+# version: 2.1
+
+# orbs:
+#   executor-tools: feedyard/executor-tools@dev:latest
+
+# on-push-master: &on-push-master
+#   branches:
+#     only: /master/
+#   tags:
+#     ignore: /.*/
+
+# on-tag-master: &on-tag-master
+#   branches:
+#     ignore: /.*/
+#   tags:
+#     only: /.*/
+
+# workflows:
+#   version: 2
+#   di-circleci-base-image-pipeline:
+#     jobs:
+#       - executor-tools/dev-release:
+#           name: "dev-build"
+#           context: twdps-di
+#           image: twdps/di-circleci-base-image
+#           tag: edge
+#           docker-cve-scan: false
+#           snyk-organization: twdps
+#           after-build:
+#             - run:
+#                 command: |
+#                   pwd
+#                   ls -la
+#                   docker run -it \
+#                              -v /var/run/docker.sock:/var/run/docker.sock \
+#                              -e "SNYK_TOKEN=$SNYK_TOKEN" \
+#                              -v "${PWD}:/" \
+#                              snyk/snyk-cli:1.320.0-docker test \
+#                              --org=twdps \
+#                              --severity-threshold=low \
+#                              --docker twdps/di-circleci-base-image:edge \
+#                              --file=./Dockerfile
+#             - run:
+#                 command: |
+#                   CID=$(docker run --name di-circleci-base-image-edge \
+#                       -it -d --entrypoint "/bin/ash" \
+#                       "twdps/di-circleci-base-image:edge")
+#                   docker run -it \
+#                              -v /var/run/docker.sock:/var/run/docker.sock \
+#                              -e IMAGE_NAME="di-circleci-base-image" \
+#                              -e IMAGE_TAG="edge" \
+#                              -e CONTAINER_USER="circleci" \
+#                              -e CID="$CID" \
+#                              "feedyard/docker-benchmark"
+#                   docker run -it --rm \
+#                             -v /var/run/docker.sock:/var/run/docker.sock \
+#                             -e CHEF_LICENSE="accept" \
+#                             -v "$(pwd)":/share \
+#                             chef/inspec exec profiles/circleci-base-image \
+#                             -t docker://"${CID}"
+#           filters: *on-push-master
+          
+#       - executor-tools/publish:
+#           name: Release
+#           context: twdps-di
+#           image: twdps/di-circleci-base-image
+#           release: stable
+#           clean-tags:
+#             - executor-tools/clean-docker-hub:
+#                 image: twdps/di-circleci-base-image
+#           filters: *on-tag-master
           
 
-  # currently circleci does not support scheduled builds that use restricted contexts
-  #
-  # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
-  # di-circleci-base-image-image-nightly-build:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 6 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
-  #   jobs:
-  #     - docker/publish:
-  #         name: nightly-build
-  #         context: ZTW
-  #         deploy: false
-  #         image: twdps/di-circleci-base-image
-  #         lint-dockerfile: true
-  #         tag: nightly
-  #         after_build:
-  #           - snyk/scan:
-  #               docker-image-name: twdps/di-circleci-base-image:edge
-  #               organization: twdps
-  #               fail-on-issues: true
-  #               monitor-on-build: false
+#   # currently circleci does not support scheduled builds that use restricted contexts
+#   #
+#   # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
+#   # di-circleci-base-image-image-nightly-build:
+#   #   triggers:
+#   #     - schedule:
+#   #         cron: "0 6 * * *"
+#   #         filters:
+#   #           branches:
+#   #             only:
+#   #               - master
+#   #   jobs:
+#   #     - docker/publish:
+#   #         name: nightly-build
+#   #         context: ZTW
+#   #         deploy: false
+#   #         image: twdps/di-circleci-base-image
+#   #         lint-dockerfile: true
+#   #         tag: nightly
+#   #         after_build:
+#   #           - snyk/scan:
+#   #               docker-image-name: twdps/di-circleci-base-image:edge
+#   #               organization: twdps
+#   #               fail-on-issues: true
+#   #               monitor-on-build: false
