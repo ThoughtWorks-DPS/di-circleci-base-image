@@ -36,12 +36,10 @@ workflows:
           after_build:
             - run:
                 command: |
-                  pwd
-                  ls -la
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e "SNYK_TOKEN=$SNYK_TOKEN" \
-                             -v "${PWD}:/home/circleci/project" \
+                             -v "${PWD}:/project" \
                              snyk/snyk-cli:1.320.0-docker test \
                              --org=twdps \
                              --severity-threshold=low \
