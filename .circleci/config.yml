@@ -104,6 +104,7 @@ workflows:
             - run:
                 command: |
                   pwd
+                  ls -la
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e "SNYK_TOKEN=$SNYK_TOKEN" \
