@@ -34,5 +34,5 @@ docker run -it --rm \
            -v /var/run/docker.sock:/var/run/docker.sock \
            -e CHEF_LICENSE="accept" \
            -v "$(pwd)":/share \
-           chef/inspec exec profiles/circleci-base-image \
+           chef/inspec exec profiles/di-circleci-base-image \
            -t docker://"${CID}"

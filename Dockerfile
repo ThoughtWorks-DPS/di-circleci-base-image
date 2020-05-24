@@ -18,7 +18,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.38.0-r0 && \
-    sudo npm install -g snyk && \
+    sudo npm install -g snyk@1.327.0 && \
     sudo rc-update add docker boot
 
 HEALTHCHECK NONE
