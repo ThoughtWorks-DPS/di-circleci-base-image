@@ -9,6 +9,9 @@ control 'packages' do
     its('stdout') { should include ('gnupg-2.2.19-r0') }
     its('stdout') { should include ('docker-19.03.5-r1') }
     its('stdout') { should include ('openrc-0.42.1-r2') }
+    its('stdout') { should include ('libstdc++==9.2.0-r4') }
+    its('stdout') { should include ('nodejs==12.15.0-r1') }
+    its('stdout') { should include ('npm==12.15.0-r1') }
     its('stdout') { should include ('jq-1.6_rc1-r1') }
   end
 end
@@ -28,5 +31,14 @@ control 'secrethub version' do
   desc 'confirm version reported by secrethub matches the desired version'
   describe command('secrethub --version') do
     its('stderr') { should include ('0.38') }
+  end
+end
+
+control 'snyk version' do
+  impact 1.0
+  title 'confirm snyk version installed'
+  desc 'confirm version reported by snyk matches the desired version'
+  describe command('snyk -v') do
+    its('stderr') { should include ('1.321') }
   end
 end
