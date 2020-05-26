@@ -134,7 +134,9 @@ workflows:
                 image: twdps/di-circleci-base-image
           filters: *on-tag-master        
 
-          
+# CID=$(docker run --name di-circleci-remote-docker-edge -it -d --entrypoint "/bin/ash" "twdps/di-circleci-remote-docker:2020.05")  
+
+# docker run -it -v /var/run/docker.sock:/var/run/docker.sock -e IMAGE_NAME="di-circleci-remote-docker" -e IMAGE_TAG="edge" -e CONTAINER_USER="circleci" -e CID="$CID" "feedyard/docker-benchmark"
   # currently circleci does not support scheduled builds that use restricted contexts
   #
   # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
