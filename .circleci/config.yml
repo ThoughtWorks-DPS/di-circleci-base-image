@@ -115,7 +115,7 @@ workflows:
                              -e IMAGE_TAG="edge" \
                              -e CONTAINER_USER="circleci" \
                              -e CID="$CID" \
-                             "feedyard/docker-benchmark"
+                             "feedyard/docker-benchmark" standard
                   docker run -it --rm \
                             -v /var/run/docker.sock:/var/run/docker.sock \
                             -e CHEF_LICENSE="accept" \
