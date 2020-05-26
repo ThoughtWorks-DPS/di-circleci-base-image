@@ -109,8 +109,6 @@ workflows:
                   CID=$(docker run --name di-circleci-base-image-edge \
                       -it -d --entrypoint "/bin/ash" \
                       "twdps/di-circleci-base-image:edge")
-                  docker ps
-                  echo $CID
                   docker run -it \
                              -v /var/run/docker.sock:/var/run/docker.sock \
                              -e IMAGE_NAME="di-circleci-base-image" \
@@ -122,7 +120,7 @@ workflows:
                             -v /var/run/docker.sock:/var/run/docker.sock \
                             -e CHEF_LICENSE="accept" \
                             -v "$(pwd)":/share \
-                            chef/inspec exec profiles/di-circleci-base-image \
+                            chef/inspec exec /share/profiles/di-circleci-base-image \
                             -t docker://"${CID}"
           filters: *on-push-master
           
