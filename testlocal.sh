@@ -20,4 +20,4 @@ conftest test Dockerfile --data .opacisrc
 rm -rf policy
 
 docker run -it -d --name di-circleci-base-image-edge --entrypoint "/bin/ash" twdps/di-circleci-base-image:edge
-docker run -it -v "${PWD}:/code" bats/bats test
+bats test

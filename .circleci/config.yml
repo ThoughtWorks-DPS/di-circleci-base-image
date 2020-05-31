@@ -28,12 +28,8 @@ workflows:
           docker-cve-scan: true
           snyk-organization: twdps
           cis-docker-image-scan: true
-          after-build:
-            - run:
-                command: |
-                  pwd
-                  docker run -it -d --name di-circleci-base-image-edge --entrypoint "/bin/ash" twdps/di-circleci-base-image:edge
-                  docker run -it -v/var/run/docker.sock:/var/run/docker.sock -v "${PWD}:/code" --workdir /code bats/bats test
+          bats-test: true
+          container-name: di-circleci-base-image-edge
           filters: *on-push-master
           
       - executor-tools/publish:

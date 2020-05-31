@@ -33,3 +33,8 @@
   run bash -c "docker exec di-circleci-base-image-edge conftest --version"
   [[ "${output}" =~ "0.18" ]]
 }
+
+@test "bats version" {
+  run bash -c "docker exec di-circleci-base-image-edge bats -v"
+  [[ "${output}" =~ "1.1" ]]
+}
