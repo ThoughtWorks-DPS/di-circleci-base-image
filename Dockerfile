@@ -26,6 +26,6 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo mv conftest /usr/local/bin && \
     sudo rc-update add docker boot
 
-USER cirlceci
+USER circleci
 
 HEALTHCHECK NONE
