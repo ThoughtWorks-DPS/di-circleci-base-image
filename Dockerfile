@@ -2,8 +2,6 @@ FROM twdps/di-circleci-remote-docker:2020.05
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
-#ENV CONFTEST_VERSION=0.18.2
-
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
@@ -23,11 +21,8 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo npm install -g snyk@1.327.0 && \
     sudo rc-update add docker boot
 
-# COPY ./profiles/cis-docker-container /share/profiles/cis-docker-container
-# COPY ./profiles/cis-docker-image /share/profiles/cis-docker-image
-# VOLUME ["/share"]
-
 USER cirlceci
+
 HEALTHCHECK NONE
 #https://github.com/open-policy-agent/conftest/releases/download/v0.18.2/conftest_0.18.2_Darwin_x86_64.tar.gz
     # sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz & \
