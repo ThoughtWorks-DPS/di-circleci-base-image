@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+_() { echo 'cleanup'; docker rm -f di-circleci-base-image-edge; docker rmi -f twdps/di-circleci-base-image:edge ; }
+trap _ EXIT
 
 # use tag arg when provided
 # in this example, the .unpinned dockerfile uses unpinned package definitions for
@@ -17,4 +19,5 @@ conftest pull https://raw.githubusercontent.com/ncheneweth/opa-dockerfile-benchm
 conftest test Dockerfile --data .opacisrc
 rm -rf policy
 
-bash test.sh
+docker run -it -d --name di-circleci-base-image-edge --entrypoint "/bin/ash" twdps/di-circleci-base-image:edge
+docker run -it -v "${PWD}:/code" bats/bats test
