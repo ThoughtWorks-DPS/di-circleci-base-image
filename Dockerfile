@@ -3,6 +3,7 @@ FROM twdps/di-circleci-remote-docker:2020.05
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
 ENV CONFTEST_VERSION=0.18.2
+WORKDIR /home
 
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004
@@ -27,5 +28,6 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo rc-update add docker boot
 
 USER circleci
+WORKDIR /home/circleci/project
 
 HEALTHCHECK NONE
