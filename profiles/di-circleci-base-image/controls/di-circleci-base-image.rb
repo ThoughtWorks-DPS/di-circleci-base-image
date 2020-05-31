@@ -42,3 +42,12 @@ control 'snyk version' do
     its('stdout') { should include ('1.321') }
   end
 end
+
+control 'conftest version' do
+  impact 1.0
+  title 'confirm conftest version installed'
+  desc 'confirm version reported by conftest matches the desired version'
+  describe command('conftest --version') do
+    its('stdout') { should include ('0.18') }
+  end
+end
