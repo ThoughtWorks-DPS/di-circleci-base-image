@@ -23,9 +23,9 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo npm install -g snyk@1.327.0 && \
     sudo rc-update add docker boot
 
-COPY ./profiles/cis-docker-container /share/profiles/cis-docker-container
-COPY ./profiles/cis-docker-image /share/profiles/cis-docker-image
-VOLUME ["/share"]
+# COPY ./profiles/cis-docker-container /share/profiles/cis-docker-container
+# COPY ./profiles/cis-docker-image /share/profiles/cis-docker-image
+# VOLUME ["/share"]
 
 USER cirlceci
 HEALTHCHECK NONE
