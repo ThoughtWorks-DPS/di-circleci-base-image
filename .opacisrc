@@ -10,5 +10,5 @@ cispolicyconfig:
   dockerfile_scanned_for_secrets: true
   packages_verified: true
 setuid:
-  setuid_or_setgid_values_allow_escalation: "-rwsr-xr-x    1 root     root        128752 Apr 29 12:55 /usr/bin/sudo"
+  setuid_or_setgid_values_allow_escalation: false
   docker_content_trust: false

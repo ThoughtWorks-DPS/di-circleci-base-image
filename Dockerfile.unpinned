@@ -22,8 +22,8 @@ RUN sudo apk add --no-cache \
              secrethub-cli && \
     sudo npm install -g snyk && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
-    sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && sudo rm conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
-    sudo mv conftest /usr/local/bin && \
+    sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
+    sudo mv conftest /usr/local/bin && sudo rm * && \
     sudo rc-update add docker boot
 
 USER cirlceci
