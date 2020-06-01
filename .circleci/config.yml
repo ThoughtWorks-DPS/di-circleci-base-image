@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  executor-tools: feedyard/executor-tools@dev:latest
+  executor-tools: feedyard/executor-tools@dev.latest
 
 on-push-master: &on-push-master
   branches:
@@ -21,6 +21,7 @@ workflows:
   di-circleci-base-image-pipeline:
     jobs:
       - executor-tools/dev-release:
+          shell: secrethub run -- /bin/bash
           name: "dev-build"
           context: twdps-di
           image: twdps/di-circleci-base-image
