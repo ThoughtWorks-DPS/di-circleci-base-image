@@ -58,7 +58,7 @@ workflows:
           name: "nightly-build"
           context: twdps-di
           image: twdps/di-circleci-base-image
-          release-tag: nightly
+          tag: nightly
           dockerfile: Dockerfile.unpinned
           docker-cve-scan: true
           snyk-organization: twdps
