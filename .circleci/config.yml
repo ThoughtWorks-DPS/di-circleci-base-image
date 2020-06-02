@@ -21,7 +21,7 @@ workflows:
   di-circleci-base-image-pipeline:
     jobs:
       - executor-tools/dev-release:
-          shell: secrethub run -- /bin/bash
+          shell: secrethub run -- /bin/sh -eo pipefail
           name: "dev-build"
           context: twdps-di
           image: twdps/di-circleci-base-image
@@ -34,37 +34,33 @@ workflows:
           filters: *on-push-master
           
       - executor-tools/publish:
+          shell: secrethub run -- /bin/sh -eo pipefail
           name: Release
           context: twdps-di
           image: twdps/di-circleci-base-image
           release: stable
-          clean-tags:
-            - executor-tools/clean-docker-hub:
-                image: twdps/di-circleci-base-image
           filters: *on-tag-master        
 
-  # currently circleci does not support scheduled builds that use restricted contexts
-  #
+  # NOTE: currently circleci does not support scheduled builds that use restricted contexts
   # builds nightly from .unpinned Dockerfile in order to test the latest base image and installed packages
-  # di-circleci-base-image-image-nightly-build:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 6 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - master
-  #   jobs:
-  #     - docker/publish:
-  #         name: nightly-build
-  #         context: ZTW
-  #         deploy: false
-  #         image: twdps/di-circleci-base-image
-  #         lint-dockerfile: true
-  #         tag: nightly
-  #         after_build:
-  #           - snyk/scan:
-  #               docker-image-name: twdps/di-circleci-base-image:edge
-  #               organization: twdps
-  #               fail-on-issues: true
-  #               monitor-on-build: false
+  di-circleci-base-image-nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 6 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - executor-tools/dev-release:
+          shell: secrethub run -- /bin/sh -eo pipefail
+          name: "nightly-build"
+          context: twdps-di
+          image: twdps/di-circleci-base-image
+          tag: nightly
+          dockerfile: Dockerfile.unpinned
+          docker-cve-scan: true
+          snyk-organization: twdps
+          cis-docker-image-scan: true
+          bats-test: true
+          container-name: di-circleci-base-image-edge

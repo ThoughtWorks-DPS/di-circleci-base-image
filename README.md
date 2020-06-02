@@ -64,6 +64,8 @@ twdps base image includes (with dependencies):
 - jq
 - secrethub
 - snyk
+- bats
+- conftest (open policy agent)
 
 ### Tagging Scheme
 
