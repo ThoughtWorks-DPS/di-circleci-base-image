@@ -37,6 +37,7 @@ workflows:
           shell: secrethub run -- /bin/sh -eo pipefail
           name: Release
           context: twdps-di
+          pull-tag: edge
           image: twdps/di-circleci-base-image
           release: stable
           filters: *on-tag-master        
