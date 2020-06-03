@@ -99,6 +99,9 @@ To build and test the Docker image locally, run the `testlocal.sh` script:
 ```bash
 ./testlocal.sh
 ```
+*requirements for testing*  
+conftest  
+bats  
 
 ### Publishing Official Images (for Maintainers only)
 
