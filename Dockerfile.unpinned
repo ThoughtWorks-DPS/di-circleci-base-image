@@ -26,6 +26,6 @@ RUN sudo apk add --no-cache \
     sudo mv conftest /usr/local/bin && sudo rm * && \
     sudo rc-update add docker boot
 
-USER cirlceci
+USER circleci
 
 HEALTHCHECK NONE
