@@ -6,7 +6,7 @@
   [[ "${output}" =~ "curl-7.69.1-r0" ]]
   [[ "${output}" =~ "openssl-1.1.1g-r0" ]]
   [[ "${output}" =~ "gnupg-2.2.20-r0" ]]
-  [[ "${output}" =~ "docker-19.03.11-r1" ]]
+  [[ "${output}" =~ "docker-19.03.11-r0" ]]
   [[ "${output}" =~ "openrc-0.42.1-r10" ]]
   [[ "${output}" =~ "libstdc++-9.3.0-r2" ]]
   [[ "${output}" =~ "nodejs-12.18.0-r1" ]]
