@@ -20,7 +20,9 @@ RUN sudo apk add --no-cache \
              jq && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli && \
-    sudo npm install -g snyk && \
+    sudo npm install -g \
+             snyk \
+             bats && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \
