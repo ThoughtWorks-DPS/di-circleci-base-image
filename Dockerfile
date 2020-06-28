@@ -27,6 +27,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \
     sudo rc-update add docker boot && \
+    sudo mkdir ~/.gnupg && \
     sudo sh -c "echo 'allow-loopback-pinentry' > ~/.gnupg/gpg-agent.conf" && \
     sudo sh -c "echo 'pinentry-mode loopback' > ~/.gnupg/gpg.conf"
 
