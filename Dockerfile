@@ -9,7 +9,7 @@ ENV CONFTEST_VERSION=0.19.0
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
              bash==5.0.17-r0 \
-             curl==7.71.0-r1 \
+             curl==7.71.0-r0 \
              openssl==1.1.1g-r0 \
              gnupg==2.2.20-r0 \
              docker==19.03.11-r0 \
