@@ -9,7 +9,7 @@
   [[ "${output}" =~ "docker-19.03.11-r0" ]]
   [[ "${output}" =~ "openrc-0.42.1-r10" ]]
   [[ "${output}" =~ "libstdc++-9.3.0-r3" ]]
-  [[ "${output}" =~ "nodejs-12.18.0-r2" ]]
+  [[ "${output}" =~ "12.18.2-r0" ]]
   [[ "${output}" =~ "npm-12.18.0-r2" ]]
   [[ "${output}" =~ "jq-1.6_rc1-r1" ]]
 }
@@ -21,12 +21,12 @@
 
 @test "secrethub version" {
   run bash -c "docker exec di-circleci-base-image-edge secrethub --version"
-  [[ "${output}" =~ "0.39" ]]
+  [[ "${output}" =~ "0.40" ]]
 }
 
 @test "snyk version" {
   run bash -c "docker exec di-circleci-base-image-edge snyk --version"
-  [[ "${output}" =~ "1.346" ]]
+  [[ "${output}" =~ "1.361" ]]
 }
 
 @test "conftest version" {

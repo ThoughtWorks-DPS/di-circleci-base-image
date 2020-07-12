@@ -15,13 +15,13 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              docker==19.03.11-r0 \
              openrc==0.42.1-r10 \
              libstdc++==9.3.0-r3 \
-             nodejs==12.18.0-r2 \
-             npm==12.18.0-r2 \
+             nodejs==12.18.2-r0 \
+             npm==12.18.2-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-             secrethub-cli==0.39.0-r0 && \
+             secrethub-cli==0.40.0-r0 && \
     sudo npm install -g \
-             snyk@1.346.0 \
+             snyk@1.361.3 \
              bats@1.1.0 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
