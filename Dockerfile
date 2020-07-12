@@ -9,7 +9,7 @@ ENV CONFTEST_VERSION=0.19.0
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
              bash==5.0.17-r0 \
-             curl==7.71.0-r0 \
+             curl==7.71.1-r0 \
              openssl==1.1.1g-r0 \
              gnupg==2.2.20-r0 \
              docker==19.03.11-r0 \
@@ -27,9 +27,9 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \
     sudo rc-update add docker boot && \
-    mkdir ~/.gnupg && \
-    echo 'allow-loopback-pinentry' > ~/.gnupg/gpg-agent.conf && \
-    echo 'pinentry-mode loopback' > ~/.gnupg/gpg.conf
+    sudo mkdir /root/.gnupg && sudo chmod 600 /root/.gnupg && \
+    sudo sh -c "echo 'allow-loopback-pinentry' > /root/.gnupg/gpg-agent.conf" && \
+    sudo sh -c "echo 'pinentry-mode loopback' > /root/.gnupg/gpg.conf"
 
 USER circleci
 
