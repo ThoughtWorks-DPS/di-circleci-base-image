@@ -27,9 +27,10 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \
     sudo rc-update add docker boot && \
-    sudo mkdir /root/.gnupg && sudo chmod 600 /root/.gnupg && \
-    sudo sh -c "echo 'allow-loopback-pinentry' > /root/.gnupg/gpg-agent.conf" && \
-    sudo sh -c "echo 'pinentry-mode loopback' > /root/.gnupg/gpg.conf"
+    sudo mkdir /home/circleci/project/.gnupg && \
+    sudo sh -c "echo 'allow-loopback-pinentry' > /home/circleci/project/.gnupg/gpg-agent.conf" && \
+    sudo sh -c "echo 'pinentry-mode loopback' > /home/circleci/project/.gnupg/gpg.conf"&& \
+    sudo chmod -R 600 /home/circleci/project/.gnupg
 
 USER circleci
 
