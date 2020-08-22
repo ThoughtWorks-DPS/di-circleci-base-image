@@ -2,7 +2,7 @@ FROM twdps/di-circleci-remote-docker:2020.06
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
-ENV CONFTEST_VERSION=0.19.0
+ENV CONFTEST_VERSION=0.20.0
 
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004,SC2035
@@ -12,16 +12,16 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              curl==7.71.1-r0 \
              openssl==1.1.1g-r0 \
              gnupg==2.2.21-r0 \
-             docker==19.03.11-r0 \
-             openrc==0.42.1-r10 \
-             libstdc++==9.3.0-r3 \
-             nodejs==12.18.2-r0 \
-             npm==12.18.2-r0 \
+             docker==19.03.12-r0 \
+             openrc==0.42.1-r11 \
+             libstdc++==10.2.0-r1 \
+             nodejs==12.18.3-r0 \
+             npm==12.18.3-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.40.0-r0 && \
     sudo npm install -g \
-             snyk@1.361.3 \
+             snyk@1.381.1 \
              bats@1.1.0 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
