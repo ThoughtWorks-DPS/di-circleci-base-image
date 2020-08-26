@@ -11,7 +11,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              bash==5.0.18-r0 \
              curl==7.71.1-r0 \
              openssl==1.1.1g-r0 \
-             gnupg==2.2.21-r0 \
+             gnupg==2.2.21-r1 \
              docker==19.03.12-r0 \
              openrc==0.42.1-r11 \
              libstdc++==10.2.0-r1 \
@@ -21,7 +21,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.40.0-r0 && \
     sudo npm install -g \
-             snyk@1.381.1 \
+             snyk@1.384.0 \
              bats@1.1.0 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
