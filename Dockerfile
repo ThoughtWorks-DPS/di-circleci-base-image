@@ -14,7 +14,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              gnupg==2.2.21-r1 \
              docker==19.03.12-r0 \
              openrc==0.42.1-r11 \
-             libstdc++==10.2.0-r1 \
+             libstdc++==10.2.0-r2 \
              nodejs==12.18.3-r0 \
              npm==12.18.3-r0 \
              jq==1.6_rc1-r1 && \
