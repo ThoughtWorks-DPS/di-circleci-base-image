@@ -21,20 +21,20 @@
 
 @test "secrethub version" {
   run bash -c "docker exec di-circleci-base-image-edge secrethub --version"
-  [[ "${output}" =~ "0.41" ]]
+  [[ "${output}" =~ "0.41.1" ]]
 }
 
 @test "snyk version" {
   run bash -c "docker exec di-circleci-base-image-edge snyk --version"
-  [[ "${output}" =~ "1.394" ]]
+  [[ "${output}" =~ "1.401.0" ]]
 }
 
 @test "conftest version" {
   run bash -c "docker exec di-circleci-base-image-edge conftest --version"
-  [[ "${output}" =~ "0.21" ]]
+  [[ "${output}" =~ "0.21.0" ]]
 }
 
 @test "bats version" {
   run bash -c "docker exec di-circleci-base-image-edge bats -v"
-  [[ "${output}" =~ "1.1" ]]
+  [[ "${output}" =~ "1.2.1" ]]
 }

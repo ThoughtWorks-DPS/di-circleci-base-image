@@ -1,4 +1,4 @@
-FROM twdps/di-circleci-remote-docker:2020.06
+FROM twdps/di-circleci-remote-docker:2020.09
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -15,14 +15,14 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              docker==19.03.12-r0 \
              openrc==0.42.1-r11 \
              libstdc++==9.3.0-r2 \
-             nodejs==12.18.3-r0 \
-             npm==12.18.3-r0 \
+             nodejs==12.18.4-r0 \
+             npm==12.18.4-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-             secrethub-cli==0.41.0-r0 && \
+             secrethub-cli==0.41.1-r0 && \
     sudo npm install -g \
-             snyk@1.394.0 \
-             bats@1.1.0 && \
+             snyk@1.401.0 \
+             bats@1.2.1 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \

@@ -1,5 +1,5 @@
 # ci-circleci-base-image Dockerfile.unpinned
-FROM twdps/di-circleci-remote-docker:edge
+FROM twdps/di-circleci-remote-docker:stable
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
