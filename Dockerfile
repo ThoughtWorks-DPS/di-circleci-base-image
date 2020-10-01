@@ -1,4 +1,4 @@
-FROM twdps/di-circleci-remote-docker:2020.09
+FROM twdps/di-circleci-remote-docker:2020.09.1
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -8,7 +8,7 @@ ENV CONFTEST_VERSION=0.21.0
 # hadolint ignore=DL3004,SC2035
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
-             bash==5.0.17-r0 \
+             bash==5.0.18-r0 \
              curl==7.72.0-r0 \
              openssl==1.1.1g-r0 \
              gnupg==2.2.23-r0 \
