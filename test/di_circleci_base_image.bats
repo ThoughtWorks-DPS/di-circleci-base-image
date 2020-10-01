@@ -2,7 +2,7 @@
 
 @test "evaluate installed package versions" {
   run bash -c "docker exec di-circleci-base-image-edge apk -v info"
-  [[ "${output}" =~ "bash-5.0.17-r0" ]]
+  [[ "${output}" =~ "bash-5.0.18-r0" ]]
   [[ "${output}" =~ "curl-7.72.0-r0" ]]
   [[ "${output}" =~ "openssl-1.1.1h-r0" ]]
   [[ "${output}" =~ "gnupg-2.2.23-r0" ]]
