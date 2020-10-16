@@ -8,15 +8,15 @@ ENV CONFTEST_VERSION=0.21.0
 # hadolint ignore=DL3004,SC2035
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
-             bash==5.0.17-r0 \
-             curl==7.70.0-r2 \
-             openssl==1.1.1g-r0 \
-             gnupg==2.2.20-r0 \
-             docker==19.03.11-r0 \
-             openrc==0.42.1-r10 \
-             libstdc++==9.3.0-r3 \
-             nodejs==12.18.0-r2 \
-             npm==12.18.0-r2 \
+             bash==5.0.18-r0 \
+             curl==7.72.0-r0 \
+             openssl==1.1.1h-r0 \
+             gnupg==2.2.23-r0 \
+             docker==19.03.12-r0 \
+             openrc==0.42.1-r12 \
+             libstdc++==10.2.0-r5 \
+             nodejs==12.18.4-r0 \
+             npm==12.18.4-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.41.2 && \
@@ -26,7 +26,11 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo mv conftest /usr/local/bin && sudo rm * && \
-    sudo rc-update add docker boot
+    sudo rc-update add docker boot && \
+    mkdir /home/circleci/.gnupg && \
+    echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf && \
+    echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf && \
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/*
 
 USER circleci
 
