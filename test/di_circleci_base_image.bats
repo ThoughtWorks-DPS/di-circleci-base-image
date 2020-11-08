@@ -26,7 +26,7 @@
 
 @test "snyk version" {
   run bash -c "docker exec di-circleci-base-image-edge snyk --version"
-  [[ "${output}" =~ "1.422.0" ]]
+  [[ "${output}" =~ "1.424.4" ]]
 }
 
 @test "conftest version" {
