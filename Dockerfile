@@ -2,7 +2,7 @@ FROM twdps/di-circleci-remote-docker:2020.11
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
-ENV CONFTEST_VERSION=0.21.0
+ENV CONFTEST_VERSION=0.22.0
 
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004,SC2035
