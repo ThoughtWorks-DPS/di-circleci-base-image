@@ -31,7 +31,7 @@
 
 @test "conftest version" {
   run bash -c "docker exec di-circleci-base-image-edge conftest --version"
-  [[ "${output}" =~ "0.22.0" ]]
+  [[ "${output}" =~ "0.21.0" ]]
 }
 
 @test "bats version" {
