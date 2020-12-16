@@ -12,7 +12,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo apk add --no-cache \
              bash==5.0.17-r0 \
              curl==7.69.1-r3 \
-             openssl==1.1.1g-r0 \
+             openssl==1.1.1i-r0 \
              gnupg==2.2.23-r0 \
              docker==19.03.12-r0 \
              openrc==0.42.1-r11 \
