@@ -1,4 +1,4 @@
-FROM twdps/di-circleci-remote-docker:2021.01
+FROM twdps/di-circleci-remote-docker:2021.01.1
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
@@ -10,20 +10,20 @@ ENV CONFTEST_VERSION=0.21.0
 # hadolint ignore=DL3004,SC2035
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
-             bash==5.0.17-r0 \
-             curl==7.69.1-r3 \
+             bash==5.1.0-r0 \
+             curl==7.74.0-r0 \
              openssl==1.1.1i-r0 \
-             gnupg==2.2.23-r0 \
-             docker==19.03.12-r0 \
-             openrc==0.42.1-r11 \
-             libstdc++==9.3.0-r2 \
-             nodejs==12.18.4-r0 \
-             npm==12.18.4-r0 \
+             gnupg==2.2.27-r0 \
+             docker==20.10.2-r0 \
+             openrc==0.42.1-r19 \
+             libstdc++==10.2.1_pre1-r3 \
+             nodejs==14.15.4-r0 \
+             npm==14.15.4-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.41.2-r0 && \
     sudo npm install -g \
-             snyk@1.437.3 \
+             snyk@1.437.4 \
              bats@1.2.1 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
