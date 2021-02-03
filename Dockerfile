@@ -9,7 +9,7 @@ ENV CONFTEST_VERSION=0.21.0
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004,SC2035
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
-    sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/edge' >> /etc/apk/repositories" && \
+    sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
              bash==5.1.0-r0 \
              curl==7.74.0-r0 \
