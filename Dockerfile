@@ -19,6 +19,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              openrc==0.42.1-r19 \
              libstdc++==10.2.1_pre1-r3 \
              musl==1.2.2-r1 \
+             musl-utils==1.2.2-r1 \
              nodejs==14.15.4-r0 \
              npm==14.15.4-r0 \
              jq==1.6_rc1-r1 && \
