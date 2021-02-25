@@ -8,8 +8,8 @@
   [[ "${output}" =~ "gnupg-2.2.27-r0" ]]
   [[ "${output}" =~ "docker-20.10.3-r0" ]]
   [[ "${output}" =~ "openrc-0.42.1-r19" ]]
-  [[ "${output}" =~ "nodejs-14.15.4-r0" ]]
-  [[ "${output}" =~ "npm-14.15.4-r0" ]]
+  [[ "${output}" =~ "nodejs-14.16.0-r0" ]]
+  [[ "${output}" =~ "npm-14.16.0-r0" ]]
   [[ "${output}" =~ "jq-1.6_rc1-r1" ]]
 }
 
