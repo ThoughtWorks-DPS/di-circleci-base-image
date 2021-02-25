@@ -4,11 +4,10 @@
   run bash -c "docker exec di-circleci-base-image-edge apk -v info"
   [[ "${output}" =~ "bash-5.1.0-r0" ]]
   [[ "${output}" =~ "curl-7.74.0-r0" ]]
-  [[ "${output}" =~ "openssl-1.1.1i-r0" ]]
+  [[ "${output}" =~ "openssl-1.1.1j-r0" ]]
   [[ "${output}" =~ "gnupg-2.2.27-r0" ]]
-  [[ "${output}" =~ "docker-20.10.2-r0" ]]
+  [[ "${output}" =~ "docker-20.10.3-r0" ]]
   [[ "${output}" =~ "openrc-0.42.1-r19" ]]
-  [[ "${output}" =~ "libstdc++-10.2.1_pre1-r3" ]]
   [[ "${output}" =~ "nodejs-14.15.4-r0" ]]
   [[ "${output}" =~ "npm-14.15.4-r0" ]]
   [[ "${output}" =~ "jq-1.6_rc1-r1" ]]
@@ -16,7 +15,7 @@
 
 @test "docker health" {
   run bash -c "docker exec di-circleci-base-image-edge docker version"
-  [[ "${output}" =~ "20.10.2" ]]
+  [[ "${output}" =~ "20.10.3" ]]
 }
 
 @test "secrethub version" {
@@ -26,15 +25,20 @@
 
 @test "snyk version" {
   run bash -c "docker exec di-circleci-base-image-edge snyk --version"
-  [[ "${output}" =~ "1.440.1" ]]
+  [[ "${output}" =~ "1.458.0" ]]
 }
 
 @test "conftest version" {
   run bash -c "docker exec di-circleci-base-image-edge conftest --version"
-  [[ "${output}" =~ "0.21.0" ]]
+  [[ "${output}" =~ "0.23.0" ]]
 }
 
 @test "bats version" {
   run bash -c "docker exec di-circleci-base-image-edge bats -v"
   [[ "${output}" =~ "1.2.1" ]]
+}
+
+@test "chamber version" {
+  run bash -c "docker exec di-circleci-base-image-edge chamber version"
+  [[ "${output}" =~ "2.9.1" ]]
 }
