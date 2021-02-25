@@ -2,8 +2,7 @@ FROM twdps/di-circleci-remote-docker:2021.02.1
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
-# NOTE: conftest =>v0.22.0 introduce a breaking change. The --data flag does not work.
-ENV CONFTEST_VERSION=0.21.0
+ENV CONFTEST_VERSION=0.23.0
 ENV CHAMBER_VERSION=2.9.1
 
 # sudo since twdps circleci remote docker images set the USER=cirlceci
