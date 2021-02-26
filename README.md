@@ -59,6 +59,7 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - snyk
 - bats
 - conftest (open policy agent)
+- chamber (by segment.io)
 
 ### Tagging Scheme
 
