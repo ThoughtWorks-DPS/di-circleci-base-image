@@ -10,7 +10,7 @@ ENV CHAMBER_VERSION=2.9.1
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
              bash==5.1.0-r0 \
-             curl==7.74.0-r0 \
+             curl==7.74.0-r1 \
              openssl==1.1.1j-r0 \
              gnupg==2.2.27-r0 \
              docker==20.10.3-r0 \
