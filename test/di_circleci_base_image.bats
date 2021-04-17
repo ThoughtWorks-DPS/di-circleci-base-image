@@ -3,7 +3,7 @@
 @test "evaluate installed package versions" {
   run bash -c "docker exec di-circleci-base-image-edge apk -v info"
   [[ "${output}" =~ "bash-5.1.0-r0" ]]
-  [[ "${output}" =~ "curl-7.76.0-r0" ]]
+  [[ "${output}" =~ "curl-7.76.1-r0" ]]
   [[ "${output}" =~ "openssl-1.1.1k-r0" ]]
   [[ "${output}" =~ "gnupg-2.2.27-r0" ]]
   [[ "${output}" =~ "docker-20.10.3-r1" ]]
