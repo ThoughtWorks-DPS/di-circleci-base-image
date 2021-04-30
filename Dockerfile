@@ -3,7 +3,7 @@ FROM twdps/di-circleci-remote-docker:2021.04.1
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
 ENV CONFTEST_VERSION=0.24.0
-ENV CHAMBER_VERSION=2.9.1
+ENV CHAMBER_VERSION=2.10.0
 
 # sudo since twdps circleci remote docker images set the USER=cirlceci
 # hadolint ignore=DL3004,SC2035
@@ -19,9 +19,9 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              npm==14.16.1-r1 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-             secrethub-cli==0.41.2-r0 && \
+             secrethub-cli==0.42.0-r0 && \
     sudo npm install -g \
-             snyk@1.530.0 \
+             snyk@1.550.0 \
              bats@1.3.0 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
