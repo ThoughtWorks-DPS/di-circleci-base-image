@@ -54,12 +54,16 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - openssl
 - gnupg
 - docker
+- openrc
+- nodejs
+- npm
 - jq
-- secrethub
+- secrethub-cli
 - snyk
 - bats
 - conftest (open policy agent)
 - chamber (by segment.io)
+_See CHANGES.md for current versions_
 
 ### Tagging Scheme
 
