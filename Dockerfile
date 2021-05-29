@@ -10,7 +10,7 @@ ENV CHAMBER_VERSION=2.10.0
 RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
     sudo apk add --no-cache \
              bash==5.1.0-r0 \
-             curl==7.76.1-r0 \
+             curl==7.77.0-r0 \
              openssl==1.1.1k-r0 \
              gnupg==2.2.27-r0 \
              docker==20.10.3-r1 \
@@ -21,7 +21,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.42.1-r0 && \
     sudo npm install -g \
-             snyk@1.586.0 \
+             snyk@1.605.0 \
              bats@1.3.0 && \
     sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
     sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
