@@ -18,9 +18,8 @@ _difference with cimg libraries._ Enterprise settings often require specific sec
 
 **Other images in this series**  
 
+twdps/di-circleci-remote-docker
 twdps/di-circleci-infra-image  
-twdps/di-circleci-k8s-deploy-image 
-twdps/di-circleci-python-image  
 
 ## Table of Contents
 
@@ -64,6 +63,8 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - conftest (open policy agent)
 - chamber (by segment.io)
 _See CHANGES.md for current versions_
+
+_note. Snyk reports curl vulnerability that is fixed in 7.77.0, however using the new library still reports the error. Accepting cve pending update to databse_  
 
 ### Tagging Scheme
 
