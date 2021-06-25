@@ -26,7 +26,7 @@ workflows:
           context: twdps-di
           image: twdps/di-circleci-base-image
           tag: edge
-          docker-cve-scan: true
+          docker-cve-scan: false
           snyk-organization: twdps
           cis-docker-image-scan: true
           skip-base-image: true
@@ -61,7 +61,7 @@ workflows:
           image: twdps/di-circleci-base-image
           tag: nightly
           dockerfile: Dockerfile.unpinned
-          docker-cve-scan: true
+          docker-cve-scan: false
           snyk-organization: twdps
           skip-base-image: true
           cis-docker-image-scan: true
