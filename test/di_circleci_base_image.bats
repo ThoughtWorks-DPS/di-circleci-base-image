@@ -9,7 +9,7 @@
   [[ "${output}" =~ "docker-20.10.7-r1" ]]
   [[ "${output}" =~ "openrc-0.43.3-r1" ]]
   [[ "${output}" =~ "nodejs-14.17.1-r0" ]]
-  [[ "${output}" =~ "npm-14.17.1-r0" ]]
+  [[ "${output}" =~ "npm-7.17.0-r0" ]]
   [[ "${output}" =~ "jq-1.6_rc1-r1" ]]
 }
 

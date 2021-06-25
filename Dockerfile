@@ -16,7 +16,7 @@ RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/ap
              docker==20.10.7-r1 \
              openrc==0.43.3-r1 \
              nodejs==14.17.1-r0 \
-             npm==14.17.1-r0 \
+             npm==7.17.0-r0 \
              jq==1.6_rc1-r1 && \
     sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
              secrethub-cli==0.42.1-r0 && \

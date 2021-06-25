@@ -11,7 +11,7 @@ FROM twdps/di-circleci-remote-docker:2021.06*
 | docker          | 20.10.7-r0* |
 | openrc          | 0.43.3-r1*  |
 | nodejs          | 14.17.1-r0* |
-| npm             | 14.17.1-r0* |
+| npm             | 7.17.0-r0*  |
 | jq              | 1.6_rc1-r1  |
 | secrethub-cli   | 0.42.1-ro   |
 | snyk            | 1.646.0*    |
