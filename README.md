@@ -1,24 +1,22 @@
 
 <div align="center">
 	<p>
-		<img alt="CircleCI Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/di-circleci-remote-docker/master/img/circle-circleci.svg?sanitize=true" width="75" />
-		<img alt="Docker Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/di-circleci-remote-docker/master/img/circle-docker.svg?sanitize=true" width="75" />
-		<img alt="Ubuntu Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/di-circleci-remote-docker/master/img/alpine.png?sanitize=true" width="75" />
+		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
+    <br />
+		<img alt="DPS Title" src="https://raw.githubusercontent.com/ThoughtWorks-DPS/static/master/dps_lab_title.png?sanitize=true" width=350/>
 	</p>
   <h3>ThoughtWorks DPS Convenience Images</h3>
   <h1>twdps/di-circleci-base-image</h1>
-  <a href="https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/di-circleci-base-image"><img src="https://circleci.com/gh/ThoughtWorks-DPS/di-circleci-base-image.svg?style=shield"></a> <a href="https://hub.docker.com/repository/docker/twdps/di-circleci-base-image"><img src="https://img.shields.io/docker/v/twdps/di-circleci-base-image?sort=semver"></a> <a href="https://hub.docker.com/repository/docker/twdps/di-circleci-base-image"><img src="https://img.shields.io/docker/image-size/twdps/di-circleci-base-image?sort=semver"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/ThoughtWorks-DPS/di-circleci-base-image"></a>
-  <h5>A Continous Integration focused Alpine Docker image built to run on CircleCI</h5>
+  <a href="https://app.circleci.com/pipelines/github/ThoughtWorks-DPS/di-circleci-base-image"><img src="https://circleci.com/gh/ThoughtWorks-DPS/di-circleci-base-image.svg?style=shield"></a> <a href="https://hub.docker.com/repository/docker/twdps/di-circleci-base-image"><img src="https://img.shields.io/docker/v/twdps/di-circleci-base-image?sort=semver"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/ThoughtWorks-DPS/di-circleci-base-image"></a>
 </div>
 <br />
 
-With some inspiration from the CircleCI convenience images, `twdps/di-circleci-base-image` is one of a series of CircleCI remote docker executor images built FROM `twdps/di-circleci-remote-docker` for continuous delivery within a software defined delivery platform. This image is designed to serve as a base image and provides the core packages and configuration needed to provide a self-serve, low friction experience for cross functional, independent development teams with a high governance and security profile.  
+With inspiration from the CircleCI convenience images, `twdps/di-circleci-base-image` is one of a series of CircleCI remote docker executor images built FROM `twdps/di-circleci-remote-docker` that has both alpine and buster-slim variants created with self-hosted runners in mind. This image is designed to serve as a base image and provides the core packages and configuration needed to provide a self-serve, low friction experience for cross functional, independent development teams with a high governance and security profile.  
 
-_difference with cimg libraries._ Enterprise settings often require specific security and configuration testing. The twdps series of convenience images is based on Alpine linux and includes common sdlc practices including benchmark testing.  
-
+_difference with cimg libraries._ Enterprise settings often require specific security and configuration testing. The twdps series of convenience images includes common sdlc security practices, including CIS-benchmark testing. The Alpine image will generally not have any cve issues.  
+  
 **Other images in this series**  
 
-twdps/di-circleci-remote-docker
 twdps/di-circleci-infra-image  
 
 ## Table of Contents
@@ -48,12 +46,13 @@ jobs:
 
 In addition to the minimum requirements needed to be used as a remote docker executor on CircleCI, the twdps base image includes (with dependencies):
 
+- sudo (to support use of USER=circleci)
+- locale support)
 - bash
 - curl
 - openssl
 - gnupg
 - docker
-- openrc
 - nodejs
 - npm
 - jq
@@ -63,8 +62,6 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - conftest (open policy agent)
 - chamber (by segment.io)
 _See CHANGES.md for current versions_
-
-_note. Snyk reports curl vulnerability that is fixed in 7.77.0, however using the new library still reports the error. Accepting cve pending update to databse_  
 
 ### Tagging Scheme
 
@@ -109,3 +106,13 @@ We accept [issues](https://github.com/twdps/di-circleci-remote-docker/issues) an
 
 1. We won't include just anything in this image. While many of the packges in this base are commonly used by teams using CircleCI, the image is part of a larger delivery platform architecture model designed to exemplify modern cloud native practices and software defined infrastructure. In order for us to add a tool within the base image, it has to be part of  the overall TW DPS reference architecture. Suggest packages based on proposed changes to existing tools or services and include a defense for why an alternative approach is superior.  
 1. Issues are generally the best option to report bugs or request additional/removal of tools in this image. PRs for bug  fixes are always welcome.  
+
+
+
+Defining a USER for circleci executors can seem counter-intuitive even when using private runners. The intended use includes dynamically installing packages and running other containers. It is also quite common for enterprises to enforce Dockerfile configuration scanning that requires a USER, nonetheless.  
+
+**vulnerability found in sudo < 1.9.5p2-r0**
+Description: Off-by-one Error
+Info: https://snyk.io/vuln/SNYK-ALPINE314-SUDO-1308042
+
+Snyk began reporting this error with the alpine 3.14 upgrade, even though sudo is at 1.9.7
