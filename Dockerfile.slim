@@ -8,7 +8,7 @@ ENV CHAMBER_VERSION=2.10.1
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
-# hadolint ignore=DL4001,DL3004
+# hadolint ignore=DL4001,DL3004,DL3047
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \
 	echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci && \
     echo "deb [trusted=yes] https://apt.secrethub.io stable main" > /etc/apt/sources.list.d/secrethub.sources.list && apt-get update && \
