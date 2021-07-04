@@ -6,6 +6,7 @@ ENV CONFTEST_VERSION=0.25.0
 ENV CHAMBER_VERSION=2.10.1
 
 ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash", "-exo", "pipefail", "-c"]
 
 # hadolint ignore=DL3004,SC2035
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci && \

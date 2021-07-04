@@ -13,6 +13,7 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
     LC_ALL="en_US.UTF-8"
 
 ENV USER=circleci
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3004,SC2035
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories && \
