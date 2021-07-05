@@ -40,7 +40,6 @@ jobs:
       - setup-remote-docker
       - run: docker build -t 'org/image:tag' .
 ```
-
 ## What is Included in the Image
 
 In addition to the minimum requirements needed to be used as a remote docker executor on CircleCI, the twdps base image includes (with dependencies):  
