@@ -41,6 +41,7 @@ FROM twdps/di-circleci-remote-docker:slim-2021.07*
 | conftest        | 0.25.0*      |
 | chamber         | 2.10.1*      |
 
+
 ## 06-25-2021 package versions in di-circleci-base-image:1.29.0
 
 FROM twdps/di-circleci-remote-docker:2021.06*  
