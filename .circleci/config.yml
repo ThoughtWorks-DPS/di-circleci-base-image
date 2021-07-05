@@ -47,7 +47,8 @@ workflows:
 
   di-circleci-base-slim-image-pipeline:
     jobs:
-      - executor-tools/machine-executor-dev-release:
+      - executor-tools/dev-release:
+          shell: secrethub run -- /bin/sh -eo pipefail
           name: slim-dev-build
           context: twdps-di
           dockerfile: Dockerfile.slim
