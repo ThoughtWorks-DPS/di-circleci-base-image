@@ -1,13 +1,6 @@
 ---
 version: 2.1
 
-# jobs:
-#   build:
-#     machine:
-#       image: ubuntu-2004:202104-01
-#     steps:
-#       - run: pwd
-
 orbs:
   executor-tools: feedyard/executor-tools@dev:latest
 
