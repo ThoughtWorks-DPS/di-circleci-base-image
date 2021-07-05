@@ -28,7 +28,6 @@ workflows:
   di-circleci-base-alpine-image-pipeline:
     jobs:
       - executor-tools/machine-executor-dev-release:
-          shell: secrethub run -- /bin/sh -eo pipefail
           name: alpine-dev-build
           context: twdps-di
           dockerfile: Dockerfile.alpine
@@ -56,7 +55,6 @@ workflows:
   di-circleci-base-slim-image-pipeline:
     jobs:
       - executor-tools/machine-executor-dev-release:
-          shell: secrethub run -- /bin/sh -eo pipefail
           name: slim-dev-build
           context: twdps-di
           dockerfile: Dockerfile.slim
