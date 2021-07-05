@@ -23,6 +23,7 @@ workflows:
       - executor-tools/machine-executor-dev-release:
           name: alpine-dev-build
           context: twdps-di
+          secrethub-env: "secrethub_bash.env"
           dockerfile: Dockerfile.alpine
           image: twdps/di-circleci-base-image
           tag: alpine-edge
