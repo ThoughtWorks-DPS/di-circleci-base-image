@@ -56,6 +56,8 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 	LANGUAGE=en_US:en \
 	LC_ALL=en_US.UTF-8
 
+COPY COPY inspec /etc/chef/accepted_licenses/inspec
+
 USER circleci
 
 WORKDIR /home/circleci/project
