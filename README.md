@@ -30,7 +30,6 @@ twdps/di-circleci-infra-image
 
 This image can be used with the CircleCI docker executor.  
 For example:
-
 ```yaml
 jobs:
   build:
