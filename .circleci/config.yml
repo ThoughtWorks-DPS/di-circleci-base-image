@@ -27,7 +27,7 @@ workflows:
           dockerfile: Dockerfile.alpine
           image: twdps/di-circleci-base-image
           tag: alpine-edge
-          docker-cve-scan: true
+          docker-cve-scan: false
           snyk-organization: twdps
           cis-docker-image-scan: true
           skip-base-image: true

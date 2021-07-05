@@ -60,6 +60,8 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - chamber (by segment.io)
 _See CHANGES.md for current versions_
 
+_Note. Snyk is current reporting a vulnerability with sudo 1.9.7 on Alpine. However, current instructions say this is fixed in 1.9.5p2-r0. Scanning turned off until this reporting issue is resolved._
+
 ### Tagging Scheme
 
 These CircleCI executor images have the following tagging scheme:
@@ -69,7 +71,6 @@ These CircleCI executor images have the following tagging scheme:
 `stable` - points to the latest, production ready base image. For projects that want a decent level of stability while automatically recieving software updates. This is similar to using the `:latest` tag and is not a generally recommended practice. Pin the `executor` reference to a specific release and adopt new releases as part of your ci process.  
 
 `0.0.0` - Semantic release version of the image. This is the recommended version for use in a CircleCI pipeline.  
-
 
 ## Development
 
