@@ -60,7 +60,7 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - chamber (by segment.io)
 _See CHANGES.md for current versions_
 
-_Note. Snyk is current reporting a vulnerability with sudo 1.9.7 on Alpine. However, current instructions say this is fixed in 1.9.5p2-r0. Scanning turned off until this reporting issue is resolved._
+_Note. Snyk is current reporting a vulnerability with sudo 1.9.7 on Alpine. However, current cve documentation says this is fixed in 1.9.5p2-r0. Scanning turned off until this reporting issue is resolved._
 
 ### Tagging Scheme
 

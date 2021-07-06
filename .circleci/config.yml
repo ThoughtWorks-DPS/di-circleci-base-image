@@ -23,7 +23,6 @@ workflows:
       - executor-tools/machine-executor-dev-release:
           name: alpine-dev-build
           context: twdps-di
-          secrethub-env: "secrethub_bash.env"
           dockerfile: Dockerfile.alpine
           image: twdps/di-circleci-base-image
           tag: alpine-edge
@@ -34,6 +33,13 @@ workflows:
           bats-test: true
           test-path: test/di_circleci_base_image_alpine.bats
           container-name: di-circleci-base-image-alpine-edge
+          after-checkout:
+            steps:
+              - run:
+                  name: inject environment variables
+                  command: |
+                    secrethub inject -i secrethub_bash.env -o $BASH_ENV
+                    source $BASH_ENV
           filters: *on-push-master
           
       - executor-tools/publish:
