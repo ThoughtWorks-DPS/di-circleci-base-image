@@ -1,42 +1,71 @@
-# ci-circleci-base-image Dockerfile.unpinned
-FROM twdps/di-circleci-remote-docker:stable
+FROM twdps/di-circleci-remote-docker:alpine-2021.07
 
 LABEL maintainer=<nchenewe@thoughtworks.com>
 
 ENV CONFTEST_VERSION=0.25.0
 ENV CHAMBER_VERSION=2.10.1
 
-# sudo since twdps circleci remote docker images set the USER=cirlceci
-# hadolint ignore=DL3004
-RUN sudo sh -c "echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories" && \
-    sudo apk add --no-cache \
-             bash \
-             curl \
-             openssl \
-             gnupg \
-             docker \
-             openrc \
-             libstdc++ \
-             nodejs \
-             npm \
-             jq==1.6_rc1-r1 && \
-    sudo apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
-             secrethub-cli && \
-    sudo npm install -g \
-             snyk \
-             bats && \
-    sudo wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
-    sudo tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
-    sudo mv conftest /usr/local/bin && sudo rm * && \
-    sudo curl -LOs https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64 && \
-    sudo chmod +x chamber-v${CHAMBER_VERSION}-linux-amd64 && \
-    sudo mv chamber-v${CHAMBER_VERSION}-linux-amd64 /usr/local/bin/chamber && \
-    sudo rc-update add docker boot && \
+# hadolint ignore=DL3044
+ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
+    MUSL_LOCPATH=/usr/share/i18n/locales/musl \
+    LANG="C.UTF-8" \
+    LANGUAGE="en_US.UTF-8" \
+    LC_ALL="en_US.UTF-8"
+
+ENV USER=circleci
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
+
+# hadolint ignore=DL3003,DL4001,DL3047
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories && \
+    apk add --no-cache \
+        sudo \
+        libintl \
+        bash \
+        curl \
+        openssl \
+        gnupg \
+        docker \
+        openrc \
+        nodejs \
+        npm \
+        jq==1.6_rc1-r1 && \
+    apk --no-cache add --virtual build-dependencies \
+        cmake \
+        make \
+        musl \
+        musl-dev \
+        musl-utils \
+        gcc \
+        gettext-dev && \
+    wget -q https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip && \
+    unzip musl-locales-master.zip && cd musl-locales-master && \
+    cmake -DLOCALE_PROFILE=OFF -D CMAKE_INSTALL_PREFIX:PATH=/usr . && \
+    make && make install && \
+    cd .. && rm -r musl-locales-master && \
+    apk add --no-cache --repository https://alpine.secrethub.io/alpine/edge/main --allow-untrusted \
+        secrethub-cli && \
+    npm install -g \
+        snyk \
+        bats&& \
+    wget https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
+    tar xzf conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz && \
+    mv conftest /usr/local/bin && rm conftest* && \
+    curl -LOs https://github.com/segmentio/chamber/releases/download/v${CHAMBER_VERSION}/chamber-v${CHAMBER_VERSION}-linux-amd64 && \
+    chmod +x chamber-v${CHAMBER_VERSION}-linux-amd64 && \
+    mv chamber-v${CHAMBER_VERSION}-linux-amd64 /usr/local/bin/chamber && \
+    rc-update add docker boot && \
+    addgroup --gid 3434 -S $USER && \
+    adduser --uid 3434 --ingroup $USER --disabled-password $USER && \
+    echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER && \
+    chmod 0440 /etc/sudoers.d/$USER && \
+    mkdir -p /home/circleci/project && \
+    chown -R $USER:$USER /home/circleci/project && \
     mkdir /home/circleci/.gnupg && \
     echo 'allow-loopback-pinentry' > /home/circleci/.gnupg/gpg-agent.conf && \
     echo 'pinentry-mode loopback' > /home/circleci/.gnupg/gpg.conf && \
-    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/*
+    chmod 700 /home/circleci/.gnupg && chmod 600 /home/circleci/.gnupg/* && \
+    apk del build-dependencies
 
 USER circleci
 
-HEALTHCHECK NONE
+WORKDIR /home/circleci/project
