@@ -34,12 +34,11 @@ workflows:
           test-path: test/di_circleci_base_image_alpine.bats
           container-name: di-circleci-base-image-alpine-edge
           after-checkout:
-            steps:
-              - run:
-                  name: inject environment variables
-                  command: |
-                    secrethub inject -i secrethub_bash.env -o $BASH_ENV
-                    source $BASH_ENV
+            - run:
+                name: inject environment variables
+                command: |
+                  secrethub inject -i secrethub_bash.env -o $BASH_ENV
+                  source $BASH_ENV
           filters: *on-push-master
           
       - executor-tools/publish:
