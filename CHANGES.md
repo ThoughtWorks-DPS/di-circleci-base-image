@@ -5,6 +5,7 @@
 No changes to alpine-2021.07
 
 FROM twdps/di-circleci-remote-docker:slim-2021.07.1^  
+bullseye update
 
 | package         | version      |
 |-----------------|--------------|

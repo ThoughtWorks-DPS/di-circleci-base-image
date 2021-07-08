@@ -48,6 +48,7 @@ In addition to the minimum requirements needed to be used as a remote docker exe
 - bash
 - curl
 - openssl
+- locales
 - gnupg
 - docker
 - nodejs
