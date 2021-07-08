@@ -54,7 +54,7 @@ workflows:
   di-circleci-base-slim-image-pipeline:
     jobs:
       - executor-tools/dev-release:
-          shell: secrethub run -- /bin/sh -eo pipefail
+          #shell: secrethub run -- /bin/sh -eo pipefail
           name: slim-dev-build
           context: twdps-di
           dockerfile: Dockerfile.slim
@@ -63,6 +63,12 @@ workflows:
           bats-test: true
           test-path: test/di_circleci_base_image_slim.bats
           container-name: di-circleci-base-image-slim-edge
+          after-checkout:
+            - run:
+                name: inject environment variables
+                command: |
+                  secrethub inject -i secrethub.env -o $BASH_ENV
+                  source $BASH_ENV
           filters: *on-push-master
           
       - executor-tools/publish:
