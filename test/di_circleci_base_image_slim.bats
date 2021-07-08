@@ -2,27 +2,22 @@
 
 @test "sudo version" {
   run bash -c "docker exec di-circleci-base-image-slim-edge sudo --version"
-  [[ "${output}" =~ "1.8.27" ]]
+  [[ "${output}" =~ "1.9.5" ]]
 }
 
 @test "bash version" {
   run bash -c "docker exec di-circleci-base-image-slim-edge bash --version"
-  [[ "${output}" =~ "5.0.3" ]]
+  [[ "${output}" =~ "5.1.4" ]]
 }
 
 @test "curl version" {
   run bash -c "docker exec di-circleci-base-image-slim-edge curl --version"
-  [[ "${output}" =~ "7.64.0" ]]
-}
-
-@test "ssh version" {
-  run bash -c "docker exec di-circleci-base-image-slim-edge ssh -V"
-  [[ "${output}" =~ "1.1.1d" ]]
+  [[ "${output}" =~ "7.74.0" ]]
 }
 
 @test "gpg version" {
   run bash -c "docker exec di-circleci-base-image-slim-edge gpg --version"
-  [[ "${output}" =~ "2.2.12" ]]
+  [[ "${output}" =~ "2.2.27" ]]
 }
 
 @test "docker health" {
