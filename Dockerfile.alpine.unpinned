@@ -15,7 +15,7 @@ ENV PATH=/home/circleci/bin:/home/circleci/.local/bin:$PATH \
 ENV USER=circleci
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-# hadolint ignore=DL3003,DL4001,DL3047
+# hadolint ignore=DL3008,DL3003,DL4001,DL3047
 RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories && \
     apk add --no-cache \
         sudo \
